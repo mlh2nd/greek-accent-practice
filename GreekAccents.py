@@ -2,14 +2,21 @@ import unicodedata, random
 
 random.seed()
 
-file = open('sblgnt.txt', 'r', encoding="utf-8")
+def generate_book_data(inputfile):
+    book=[]
+    with open(inputfile, 'r', encoding="utf-8") as file:
+        for line in file:
+            book.append(line)
+    return book
+book = generate_book_data("sblgnt.txt")
+# file = open('sblgnt.txt', 'r', encoding="utf-8")
 
-book = []
+# book = []
 
-for line in file:
-    book.append(line)
+# for line in file:
+#     book.append(line)
 
-file.close()
+# file.close()
 
 #done = False
 practicelength = 1
@@ -25,18 +32,15 @@ def strip_accents(string):
     chars = [c for c in unicodedata.normalize('NFD', string) if c not in accents]
     return unicodedata.normalize('NFC', ''.join(chars))
 
-def choose_verse(book):
+def choose_verse(book, practicelength=1):
     verse = book[random.randrange(len(book))]
-    #verse = "1John 1:1	Ὃ ἦν ἀπ’ ἀρχῆς"
     reference = verse.split('\t')[0]        # In the SBL files, references are tab-separated from verse text
     text = verse.split('\t')[1].strip()
     words = text.split(' ')
     
     if len(words)<practicelength + 1:
-        #print("Verse too short")
         return choose_verse(book)
     else:
-        #print("Verse length OK")
         return reference, text, words
 
 def check_answer(correctanswer,attempts):
@@ -45,14 +49,10 @@ def check_answer(correctanswer,attempts):
         return 0
     else:
         answer = input().strip()
-        #print(answer)
         answer = unicodedata.normalize('NFD',answer)
-        #print(answer)
         answer.replace('\u0302','͂').replace('\'','\ʼ').replace('’','\ʼ')    # Change circumflex and apostrophe to match SBL file   
         answer.replace('\'','ʼ')
-        #print(answer)
         answer = unicodedata.normalize('NFC',answer)
-        #print(answer)
         if answer == correctanswer:
             print("\nὈρθῶς ἀπεκρίθης!\n")
             return 1
