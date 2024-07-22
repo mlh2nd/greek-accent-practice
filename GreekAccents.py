@@ -9,16 +9,7 @@ def generate_book_data(inputfile):
             book.append(line)
     return book
 book = generate_book_data("sblgnt.txt")
-# file = open('sblgnt.txt', 'r', encoding="utf-8")
 
-# book = []
-
-# for line in file:
-#     book.append(line)
-
-# file.close()
-
-#done = False
 practicelength = 1
 startattempts = 2
 versespracticed = 0
@@ -62,6 +53,27 @@ def check_answer(correctanswer,attempts):
             return check_answer(correctanswer, attempts)
             
     
+def generate_practice_text(wordlist, practicelength=1):
+    startword = random.randrange(len(wordlist)-practicelength+1)
+    before = unicodedata.normalize('NFC',' '.join(wordlist[0:startword]))
+    after = unicodedata.normalize('NFC',' '.join(wordlist[startword+practicelength:len(wordlist)]))
+    practicewords = []
+    practicewordsstripped = []
+    for word in range(practicelength):
+        practicewords.append(wordlist[startword + word])
+        practicewordsstripped.append(strip_accents(wordlist[startword + word]))
+    test = unicodedata.normalize("NFC", " ".join(practicewordsstripped))
+    answer = unicodedata.normalize("NFC", " ".join(practicewords))
+    return before, after, test, answer
+
+
+def check_answer(useranswer, correctanswer):
+    if useranswer == correctanswer:
+        return True
+    else:
+        return False
+
+"""
 while True:
     reference, text, words = choose_verse(book)
     attempts = startattempts
@@ -94,7 +106,7 @@ while True:
 print("\nYour score this session: ", score, "/", versespracticed)
 exit = input("\nPress <enter> to close program.")
 
-
+"""
 
 
 
