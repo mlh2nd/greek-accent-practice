@@ -20,6 +20,7 @@ annotated_text(before, (test, "", "#ffa"), after, f"\n({reference})")
 @st.experimental_fragment
 def quiz_instance(correct_answer):
     useranswer = st.text_input("Add the correct accents: ", value=test)
+    st.write("(Note: On mobile devices you may need to press Enter on the keyboard before pressing the \"Check answer\" button)")
     submitted = st.button("Check answer")
     if submitted:
         correct = ga.check_answer(useranswer, correct_answer)
