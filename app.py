@@ -15,12 +15,11 @@ with col2:
 text_data = ga.generate_book_data(sourcetext)
 reference, verse, wordlist = ga.choose_verse(text_data, practicelength)
 before, after, test, answer = ga.generate_practice_text(wordlist, practicelength)
-annotated_text(before, (test, ""), after, f"\n({reference})")
+annotated_text(before, (test, "", "#ffa"), after, f"\n({reference})")
 
 @st.experimental_fragment
 def quiz_instance(correct_answer):
-    
-    useranswer = st.text_input("Type the highlighted word with correct accents: ")
+    useranswer = st.text_input("Add the correct accents: ", value=test)
     submitted = st.button("Check answer")
     if submitted:
         correct = ga.check_answer(useranswer, correct_answer)
@@ -28,14 +27,15 @@ def quiz_instance(correct_answer):
             annotated_text(("Ὀρθῶς ἀπεκρίθης!","", "#afa"))
         else:
             annotated_text((f"Try again!", "", "#faa"))
-    show_answer = st.button("Show answer")
-    if show_answer:
+    with st.expander("Show answer"):
         st.write(f"Correct answer: {correct_answer}")
 
 quiz_instance(answer)
 
 
-st.button("New Verse")
+st.button("New verse")
+with st.expander("Review accent rules"):
+    st.write("Accent rule review to be added later")
 st.divider()
 st.write("The SBLGNT is licensed under a Creative Commons Attribution 4.0 International License.")
 st.write("Copyright 2010 by the Society of Biblical Literature and Logos Bible Software.")
