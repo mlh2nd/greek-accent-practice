@@ -39,7 +39,7 @@ with st.expander("Review accent rules"):
     st.write("Accent rule review to be added later")
 st.divider()
 
-with st.expander("Copyright notices")
+with st.expander("Copyright notices"):
     st.write("The SBLGNT is licensed under a Creative Commons Attribution 4.0 International License.")
     st.write("Copyright 2010 by the Society of Biblical Literature and Logos Bible Software.")
     st.divider()
