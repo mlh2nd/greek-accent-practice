@@ -38,7 +38,9 @@ st.button("New verse")
 with st.expander("Review accent rules"):
     st.write("Accent rule review to be added later")
 st.divider()
-st.write("The SBLGNT is licensed under a Creative Commons Attribution 4.0 International License.")
-st.write("Copyright 2010 by the Society of Biblical Literature and Logos Bible Software.")
-st.divider()
-st.write("This web app is CC0-1.0 (Public domain, no copyright)")
+
+with st.expander("Copyright notices")
+    st.write("The SBLGNT is licensed under a Creative Commons Attribution 4.0 International License.")
+    st.write("Copyright 2010 by the Society of Biblical Literature and Logos Bible Software.")
+    st.divider()
+    st.write("This web app is CC0-1.0 (Public domain, no copyright)")
